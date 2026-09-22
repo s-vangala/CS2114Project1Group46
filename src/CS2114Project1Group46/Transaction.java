@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 // -------------------------------------------------------------------------
 /**
- * Write a one-sentence summary of your class here. Follow it with additional
- * details about its purpose, what abstraction it represents, and how to use it.
+ * This is the Transaction class, which contains methods for storing and
+ * accessing information about each transaction.
  * 
  * @author Shresta Vangala (svangala)
  * @version 2026.09.21

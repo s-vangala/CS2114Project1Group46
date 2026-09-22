@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
- * Test class for History
+ * Test class that tests the methods in the History class.
  * 
  * @author Shresta Vangala (svangala)
  * @version 2026.09.21
@@ -20,7 +20,7 @@ public class HistoryTest
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * Set up for all test methods. Runs before every test.
      */
     public void setUp()
     {
@@ -51,7 +51,7 @@ public class HistoryTest
 
     // ----------------------------------------------------------
     /**
-     * tests the addTransaction method
+     * tests the History constructor
      */
     public void testHistory()
     {
@@ -75,7 +75,7 @@ public class HistoryTest
 
 
     /**
-     * 
+     * tests that adding a null transaction throws an exception
      */
     public void testAddTransactionNull()
     {
@@ -94,7 +94,7 @@ public class HistoryTest
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * tests querying transactions within a date range
      */
     public void testQueryByDateRange()
     {
@@ -113,7 +113,7 @@ public class HistoryTest
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * tests that the start date can be included in the range
      */
     public void testQueryByDateRangeStartDate()
     {
@@ -127,26 +127,27 @@ public class HistoryTest
         assertEquals(t1, results.get(0));
     }
 
+
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * tests when a transaction date is after the start date
      */
     public void testQueryByDateRangeAfterStart()
     {
         history.addTransaction(t2);
 
-        ArrayList<Transaction> results =
-            history.queryByDateRange(
-                LocalDate.of(2026, 7, 1),
-                LocalDate.of(2026, 7, 31));
+        ArrayList<Transaction> results = history.queryByDateRange(
+            LocalDate.of(2026, 7, 1),
+            LocalDate.of(2026, 7, 31));
 
         assertEquals(1, results.size());
         assertEquals(t2, results.get(0));
     }
 
+
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * tests that the end date can be included in the range
      */
     public void testQueryByDateRangeEndDate()
     {
@@ -159,19 +160,19 @@ public class HistoryTest
         assertEquals(1, results.size());
         assertEquals(t2, results.get(0));
     }
-    
+
+
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * tests when a transaction date is before the end date
      */
     public void testQueryByDateRangeBeforeEnd()
     {
         history.addTransaction(t1);
 
-        ArrayList<Transaction> results =
-            history.queryByDateRange(
-                LocalDate.of(2026, 4, 1),
-                LocalDate.of(2026, 5, 31));
+        ArrayList<Transaction> results = history.queryByDateRange(
+            LocalDate.of(2026, 4, 1),
+            LocalDate.of(2026, 5, 31));
 
         assertEquals(1, results.size());
         assertEquals(t1, results.get(0));
@@ -180,7 +181,7 @@ public class HistoryTest
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * tests that an invalid date range returns an empty list
      */
     public void testQueryByDateRangeInvalid()
     {
@@ -197,7 +198,7 @@ public class HistoryTest
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * tests querying transactions by category
      */
     public void testGetByCategory()
     {
@@ -216,7 +217,7 @@ public class HistoryTest
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * tests getByCategory when no transactions match
      */
     public void testGetByCategoryNoMatch()
     {
@@ -231,7 +232,7 @@ public class HistoryTest
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * tests getTotal with multiple transactions
      */
     public void testGetTotal()
     {
@@ -249,7 +250,7 @@ public class HistoryTest
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * tests getTotal with an empty list
      */
     public void testGetTotalEmpty()
     {
