@@ -10,6 +10,7 @@
 //staff.
 package CS2114Project1Group46;
 import static org.junit.Assert.*;
+import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,67 +23,140 @@ import org.junit.Test;
 * @version 2026.09.22
 */
 public class UserProfileTest {
- // The UserProfile instance under test
- private UserProfile profile;
 
- // ----------------------------------------------------------
- /**
-  * Creates a fresh UserProfile with a known starting salary before
-  * each test.
-  */
- @Before
- public void setUp() {
-     profile = new UserProfile();
-     profile.setSalary(3000.00);
- }
+    private UserProfile profile;
 
+    // ----------------------------------------------------------
+    /**
+     * Sets up the test fixture before each test execution.
+     * Creates a new {@link UserProfile} instance and initializes it 
+     * with a standard starting salary for predictable testing state.
+     */
+    @Before
+    public void setUp() {
+        profile = new UserProfile();
+        profile.setSalary(3000.00);
+    }
 
- // ----------------------------------------------------------
- /**
-  * A valid salary should be stored and retrievable.
-  */
- @Test
- public void setSalary_normal_updatesSalary() {
-     profile.setSalary(4000.00);
-     assertEquals(4000.00, profile.getSalary(), 0.001);
- }
+    // ----------------------------------------------------------
+    /**
+     * Test constructor defaults to ensure fresh state.
+     */
+    @Test
+    public void testUserProfileConstructor() {
+        UserProfile newProfile = new UserProfile();
+        assertEquals(0.0, newProfile.getSalary(), 0.001);
+        assertEquals(0.0, newProfile.getSurplusDeficit(), 0.001);
+        assertTrue(newProfile.getFixedExpenses().isEmpty());
+    }
 
+    // ----------------------------------------------------------
+    /**
+     * Normal case: Valid salary should update salary successfully.
+     */
+    @Test
+    public void testSetSalaryNormal() {
+        profile.setSalary(4000.00);
+        assertEquals(4000.00, profile.getSalary(), 0.001);
+    }
 
- // ----------------------------------------------------------
- /**
-  * A negative salary is invalid input and should be rejected,
-  * leaving the previous salary in place.
-  */
- @Test
- public void setSalary_negativeAmount_isRejected() {
-     double before = profile.getSalary();
-     profile.setSalary(-500.00);
-     assertEquals(before, profile.getSalary(), 0.001);
- }
+    // ----------------------------------------------------------
+    /**
+     * Bad input case: Negative salary should be rejected.
+     */
+    @Test
+    public void testSetSalaryNegative() {
+        double salaryBefore = profile.getSalary();
+        profile.setSalary(-500.00);
+        assertEquals(salaryBefore, profile.getSalary(), 0.001);
+    }
 
+    // ----------------------------------------------------------
+    /**
+     * Bad input case: Double.NaN salary should be rejected.
+     */
+    @Test
+    public void testSetSalaryNaN() {
+        double salaryBefore = profile.getSalary();
+        profile.setSalary(Double.NaN);
+        assertEquals(salaryBefore, profile.getSalary(), 0.001);
+    }
 
- // ----------------------------------------------------------
- /**
-  * A negative balance is a legitimate deficit, not an error, and
-  * should be stored as is.
-  */
- @Test
- public void updateSurplusDeficit_normal_setsDeficitValue() {
-     profile.updateSurplusDeficit(-250.00);
-     assertEquals(-250.00, profile.getSurplusDeficit(), 0.001);
- }
+    // ----------------------------------------------------------
+    /**
+     * Normal case: Adding and updating valid fixed expenses.
+     */
+    @Test
+    public void testAddFixedExpenseNormal() {
+        profile.addFixedExpense("Rent", 1200.00);
+        Map<String, Double> expenses = profile.getFixedExpenses();
+        assertEquals(1, expenses.size());
+        assertEquals(1200.00, expenses.get("Rent"), 0.001);
 
+        // Updating existing expense key
+        profile.addFixedExpense("Rent", 1250.00);
+        assertEquals(1250.00, profile.getFixedExpenses().get("Rent"), 0.001);
+    }
 
- // ----------------------------------------------------------
- /**
-  * NaN represents a corrupted upstream calculation and should be
-  * rejected, leaving the previous valid value in place.
-  */
- @Test
- public void updateSurplusDeficit_NaN_isRejected() {
-     profile.updateSurplusDeficit(100.00);
-     double before = profile.getSurplusDeficit();
-     profile.updateSurplusDeficit(Double.NaN);
-     assertEquals(before, profile.getSurplusDeficit(), 0.001);
- }
+    // ----------------------------------------------------------
+    /**
+     * Bad input case: Null, empty, negative, and NaN expense parameters.
+     */
+    @Test
+    public void testAddFixedExpenseBadInput() {
+        profile.addFixedExpense("Rent", 1200.00);
+
+        // Null category
+        profile.addFixedExpense(null, 500.00);
+        // Empty string category
+        profile.addFixedExpense("", 500.00);
+        // Negative amount
+        profile.addFixedExpense("Utilities", -150.00);
+        // NaN amount
+        profile.addFixedExpense("Utilities", Double.NaN);
+
+        Map<String, Double> expenses = profile.getFixedExpenses();
+        assertEquals(1, expenses.size());
+        assertTrue(expenses.containsKey("Rent"));
+        assertFalse(expenses.containsKey("Utilities"));
+    }
+
+    // ----------------------------------------------------------
+    /**
+     * Defensive copy check: External modifications must not corrupt internal state.
+     */
+    @Test
+    public void testGetFixedExpensesDefensiveCopy() {
+        profile.addFixedExpense("Rent", 1200.00);
+        Map<String, Double> copy = profile.getFixedExpenses();
+        copy.put("Groceries", 300.00);
+
+        assertFalse(profile.getFixedExpenses().containsKey("Groceries"));
+        assertEquals(1, profile.getFixedExpenses().size());
+    }
+
+    // ----------------------------------------------------------
+    /**
+     * Normal case: Valid positive or negative balance updates surplus/deficit.
+     */
+    @Test
+    public void testUpdateSurplusDeficitNormal() {
+        profile.updateSurplusDeficit(500.00);
+        assertEquals(500.00, profile.getSurplusDeficit(), 0.001);
+
+        profile.updateSurplusDeficit(-250.00);
+        assertEquals(-250.00, profile.getSurplusDeficit(), 0.001);
+    }
+
+    // ----------------------------------------------------------
+    /**
+     * Bad input case: Double.NaN input should be rejected.
+     */
+    @Test
+    public void testUpdateSurplusDeficitNaN() {
+        profile.updateSurplusDeficit(100.00);
+        double before = profile.getSurplusDeficit();
+        profile.updateSurplusDeficit(Double.NaN);
+        assertEquals(before, profile.getSurplusDeficit(), 0.001);
+    }
 }
