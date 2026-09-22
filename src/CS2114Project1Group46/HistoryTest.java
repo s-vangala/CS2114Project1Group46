@@ -97,4 +97,38 @@ public class HistoryTest
         assertEquals(t1, results.get(0));
         assertEquals(t2, results.get(1));
     }
+    
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     */
+    public void testQueryByDateRangeStartDate()
+    {
+        history.addTransaction(t1);
+
+        ArrayList<Transaction> results =
+            history.queryByDateRange(
+                LocalDate.of(2026, 5, 1),
+                LocalDate.of(2026, 5, 25));
+
+        assertEquals(1, results.size());
+        assertEquals(t1, results.get(0));
+    }
+    
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     */
+    public void testQueryByDateRangeEndDate()
+    {
+        history.addTransaction(t2);
+
+        ArrayList<Transaction> results =
+            history.queryByDateRange(
+                LocalDate.of(2026, 3, 1),
+                LocalDate.of(2026, 3, 15));
+
+        assertEquals(1, results.size());
+        assertEquals(t2, results.get(0));
+    }
 }
