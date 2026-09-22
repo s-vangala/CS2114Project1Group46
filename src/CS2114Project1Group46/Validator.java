@@ -7,13 +7,15 @@ import java.util.ArrayList;
  * Validates transactions before they are added to the budget history.
  * Checks for invalid amounts, overspending, and duplicate purchases.
  *
- * @author shres
+ * @author Monya
  * @version Sep 22, 2026
  */
 public class Validator
 {
     // ~ Fields ................................................................
-    
+    private Transaction purchase;
+    private double currentBalance;
+    private ArrayList<Transaction> recentPurchases;
 
     // ~ Constructors ..........................................................
     
