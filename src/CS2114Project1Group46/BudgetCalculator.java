@@ -15,7 +15,7 @@ import java.util.Map;
 
 // -------------------------------------------------------------------------
 /**
- * The BudgetCalculator class computes the surplus or deficit, percategory
+ * The BudgetCalculator class computes the surplus or deficit, per category
  * spending percentages, and remaining flexible budget for a given
  * UserProfile and list of Transaction records.
  * 
