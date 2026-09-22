@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 // -------------------------------------------------------------------------
 /**
- * Test class for Transaction
+ * Test class that tests the methods in the Transaction class.
  * 
  * @author Shresta Vangala (svangala)
  * @version 2026.09.21
@@ -19,8 +19,9 @@ public class TransactionTest
     private LocalDate date1;
     private String note;
 
+    // ----------------------------------------------------------
     /**
-     * Test the creation of a Transaction object.
+     * Set up for all test methods. Runs before every test.
      */
     public void setUp()
     {
@@ -33,9 +34,9 @@ public class TransactionTest
             "Weekly grocery shopping");
     }
 
-
+    // ----------------------------------------------------------
     /**
-     * Test the amount of a Transaction object.
+     * tests the amount of a Transaction object
      */
     public void testTransactionAmount()
     {
@@ -43,18 +44,18 @@ public class TransactionTest
         assertEquals("Groceries", t1.getCategory());
     }
 
-
+    // ----------------------------------------------------------
     /**
-     * Test the date of a Transaction object.
+     * Test the date of a Transaction object.=
      */
     public void testTransactionDate()
     {
         assertEquals(date1, t1.getDate());
     }
 
-
+    // ----------------------------------------------------------
     /**
-     * Test the category of a Transaction object.
+     * tests the category of a Transaction object
      */
     public void testTransactionCategory()
     {
@@ -64,7 +65,7 @@ public class TransactionTest
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * tests the note of a Transaction object
      */
     public void testTransactionNote()
     {

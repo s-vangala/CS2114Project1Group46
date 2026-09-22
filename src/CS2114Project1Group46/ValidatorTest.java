@@ -6,6 +6,15 @@ import java.util.ArrayList;
 
 import student.TestCase;
 
+// -------------------------------------------------------------------------
+/**
+ *  Write a one-sentence summary of your class here.
+ *  Follow it with additional details about its purpose, what abstraction
+ *  it represents, and how to use it.
+ * 
+ *  @author shres
+ *  @version Sep 22, 2026
+ */
 public class ValidatorTest
     extends student.TestCase
 {
@@ -21,7 +30,6 @@ public class ValidatorTest
     /*
      * tests a valid transaction
      */
-    @Test
     public void validTransactionTest()
     {
         Transaction purchase =
@@ -47,7 +55,6 @@ public class ValidatorTest
     /*
      * tests a negative transaction amount
      */
-    @Test
     public void negativeAmountTest()
     {
         Transaction purchase =
@@ -70,10 +77,10 @@ public class ValidatorTest
     }
 
 
-    /*
+    // ----------------------------------------------------------
+    /**
      * tests a transaction that exceeds the balance
      */
-    @Test
     public void overspendingTest()
     {
         Transaction purchase =
@@ -96,10 +103,10 @@ public class ValidatorTest
     }
 
 
-    /*
+    // ----------------------------------------------------------
+    /**
      * tests a duplicate transaction
      */
-    @Test
     public void duplicateTransactionTest()
     {
         Transaction purchase =
@@ -137,8 +144,10 @@ public class ValidatorTest
         assertFalse(result.isValid());
     }
 
-    // Tests a purchase that is too expensive
-    @Test
+    // ----------------------------------------------------------
+    /**
+     * Tests a purchase that is too expensive
+     */
     public void testOverspending() {
         Validator validator = new Validator();
 
@@ -155,8 +164,10 @@ public class ValidatorTest
         assertFalse(result.isValid());
     }
 
-    // Tests a duplicate purchase
-    @Test
+    // ----------------------------------------------------------
+    /**
+     * Tests a duplicate purchase
+     */
     public void testDuplicatePurchase() {
         Validator validator = new Validator();
 

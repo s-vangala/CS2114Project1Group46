@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 // -------------------------------------------------------------------------
 /**
- * Write a one-sentence summary of your class here. Follow it with additional
- * details about its purpose, what abstraction it represents, and how to use it.
+ * This is the History class, which contains methods for tracking transactions
+ * and their related data.
  * 
  * @author Shresta Vangala (svangala)
  * @version 2026.09.21
@@ -65,7 +65,7 @@ public class History
         }
         for (Transaction t : acceptedTransactions)
         {
-            //circle back to testing these conditions
+            // circle back to testing these conditions
             if ((t.getDate().isEqual(start) || t.getDate().isAfter(start))
                 && (t.getDate().isEqual(end) || t.getDate().isBefore(end)))
             {
@@ -101,6 +101,7 @@ public class History
      * calculates and returns the total amount of the transactions in the list
      * 
      * @param transactions
+     *            the transactions to total
      * @return the total amount of the transactions
      */
     public double getTotal(ArrayList<Transaction> transactions)
