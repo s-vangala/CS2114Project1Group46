@@ -115,10 +115,6 @@ public class ValidatorTest
      */
     public void testOverspending()
     {
-        //Validator validator = new Validator();
-
-        //Transaction purchase = new Transaction(600.0, "Shopping");
-
         ArrayList<Transaction> recentPurchases = new ArrayList<Transaction>();
 
         Validator.ValidationResult result =
@@ -136,7 +132,8 @@ public class ValidatorTest
     {
         ArrayList<Transaction> recentPurchases = new ArrayList<Transaction>();
 
-        recentPurchases.add(new Transaction(20.0, "Groceries", LocalDate.now(), "Groceries"));
+        recentPurchases.add(
+            new Transaction(20.0, "Groceries", LocalDate.now(), "Groceries"));
 
         Validator.ValidationResult result =
             validator.validateTransaction(purchase, 500.0, recentPurchases);
