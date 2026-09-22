@@ -120,13 +120,29 @@ public class HistoryTest
         history.addTransaction(t1);
 
         ArrayList<Transaction> results = history.queryByDateRange(
-            LocalDate.of(2026, 5, 1),
-            LocalDate.of(2026, 5, 25));
+            LocalDate.of(2026, 5, 12),
+            LocalDate.of(2026, 5, 31));
 
         assertEquals(1, results.size());
         assertEquals(t1, results.get(0));
     }
 
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     */
+    public void testQueryByDateRangeAfterStart()
+    {
+        history.addTransaction(t2);
+
+        ArrayList<Transaction> results =
+            history.queryByDateRange(
+                LocalDate.of(2026, 7, 1),
+                LocalDate.of(2026, 7, 31));
+
+        assertEquals(1, results.size());
+        assertEquals(t2, results.get(0));
+    }
 
     // ----------------------------------------------------------
     /**
@@ -142,6 +158,23 @@ public class HistoryTest
 
         assertEquals(1, results.size());
         assertEquals(t2, results.get(0));
+    }
+    
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     */
+    public void testQueryByDateRangeBeforeEnd()
+    {
+        history.addTransaction(t1);
+
+        ArrayList<Transaction> results =
+            history.queryByDateRange(
+                LocalDate.of(2026, 4, 1),
+                LocalDate.of(2026, 5, 31));
+
+        assertEquals(1, results.size());
+        assertEquals(t1, results.get(0));
     }
 
 

@@ -13,10 +13,10 @@ public class TransactionTest
     extends student.TestCase
 {
 
-    private Transaction transaction;
+    private Transaction t1;
     private double amount;
     private String category;
-    private LocalDate date;
+    private LocalDate date1;
     private String note;
 
     /**
@@ -25,11 +25,11 @@ public class TransactionTest
     public void setUp()
     {
 
-        LocalDate date = LocalDate.now();
-        Transaction transaction = new Transaction(
+        date1 = LocalDate.now();
+        t1 = new Transaction(
             100.0,
             "Groceries",
-            date,
+            date1,
             "Weekly grocery shopping");
     }
 
@@ -39,15 +39,8 @@ public class TransactionTest
      */
     public void testTransactionAmount()
     {
-        LocalDate date = LocalDate.now();
-        Transaction transaction = new Transaction(
-            100.0,
-            "Groceries",
-            date,
-            "Weekly grocery shopping");
-
-        assertEquals(100.0, transaction.getAmount(), 0.01);
-        assertEquals("Groceries", transaction.getCategory());
+        assertEquals(100.0, t1.getAmount(), 0.01);
+        assertEquals("Groceries", t1.getCategory());
     }
 
 
@@ -56,15 +49,7 @@ public class TransactionTest
      */
     public void testTransactionDate()
     {
-        LocalDate date = LocalDate.now();
-        Transaction transaction = new Transaction(
-            100.0,
-            "Groceries",
-            date,
-            "Weekly grocery shopping");
-
-        assertEquals(date, transaction.getDate());
-        assertEquals("Weekly grocery shopping", transaction.getNote());
+        assertEquals(date1, t1.getDate());
     }
 
 
@@ -73,14 +58,16 @@ public class TransactionTest
      */
     public void testTransactionCategory()
     {
-        LocalDate date = LocalDate.now();
-        Transaction transaction = new Transaction(
-            100.0,
-            "Groceries",
-            date,
-            "Weekly grocery shopping");
+        assertEquals("Groceries", t1.getCategory());
+    }
 
-        assertEquals(category, transaction.getCategory());
-        assertEquals("Groceries", transaction.getCategory());
+
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     */
+    public void testTransactionNote()
+    {
+        assertEquals("Weekly grocery shopping", t1.getNote());
     }
 }

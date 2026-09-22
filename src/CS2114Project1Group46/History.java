@@ -65,6 +65,7 @@ public class History
         }
         for (Transaction t : acceptedTransactions)
         {
+            //circle back to testing these conditions
             if ((t.getDate().isEqual(start) || t.getDate().isAfter(start))
                 && (t.getDate().isEqual(end) || t.getDate().isBefore(end)))
             {
