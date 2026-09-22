@@ -1,10 +1,14 @@
 package CS2114Project1Group46;
 
-import static org.junit.Assert.*;
-import java.util.NoSuchElementException;
-import org.junit.Test;
-import student.TestCase;
+import java.time.LocalDate;
 
+// -------------------------------------------------------------------------
+/**
+ * Test class for Transaction
+ * 
+ * @author Shresta Vangala (svangala)
+ * @version 2026.09.21
+ */
 public class TransactionTest
     extends student.TestCase
 {
@@ -42,7 +46,7 @@ public class TransactionTest
             date,
             "Weekly grocery shopping");
 
-        assertEquals(100.0, transaction.getAmount());
+        assertEquals(100.0, transaction.getAmount(), 0.01);
         assertEquals("Groceries", transaction.getCategory());
     }
 
